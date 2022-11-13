@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<title>Terminal</title>
+</head>
+<body>
+    <div class="container">
+        <br>
+        <button class="fa fa-trash-alt btn btn-primary" onclick="ans = undefined;document.getElementById('h').innerHTML = `Commandia<br>&copy;SJ guys September 12<sup>th</sup> 2008 <br> Type: <input type='file' onchange='readFile(this)'>`"></button>
+        <div>
+            <br>
+        </div>
+        <code id="h">
+            Commandia
+            <br>
+            &copy;SJ guys September 12<sup>th</sup> 2008
+            <br>
+            Type: <input type="file" onchange="readFile(this)">
+        </code>
+    </div>
+    <script>
+        let ans;
+        function echo(txt) {
+            const h = document.createElement('div');
+            h.innerHTML = txt
+            document.getElementById('h').appendChild(h)
+        }
+        function ask(Question) {
+            echo(Question)
+            const h = document.createElement('input');
+            h.style.border = "1px #E93E8C solid"
+            document.getElementById('h').appendChild(h) 
+            const h1 = document.createElement('button');
+            h1.style.border = "1px #E93E8C solid"
+            h1.innerHTML = "Ok"
+            document.getElementById('h').appendChild(h1)
+            h1.onclick = () => {
+                 ans = h.value;
+            }
+        }
+        function yon(Question) {
+            echo(Question)
+            const h1 = document.createElement('button');
+            h1.style.border = "1px #E93E8C solid"
+            h1.innerHTML = 'Yes';
+            h1.style.margin = "10px"
+            document.getElementById('h').appendChild(h1) 
+            const h2 = document.createElement('button');
+            h2.style.border = "1px #E93E8C solid"
+            h2.innerHTML = "No"
+            document.getElementById('h').appendChild(h2)
+            h1.onclick = () => {
+                 ans = true;
+            }
+            h2.onclick = () => {
+                 ans = false;
+            }
+        }
+        function run(code) {
+            if (!code.includes('const TSV = true')) {
+                const h = document.createElement('div');
+                h.innerHTML = 'File does not have a TSV variable set to true;'
+                document.getElementById('h').appendChild(h) 
+            } else {
+            eval(code)
+        }
+        }
+        function readFile(input) {
+            let file = input.files[0];
+            let reader = new FileReader();
+            reader.readAsText(file);
+            reader.onload = function() {
+                run(`${reader.result}`);
+            };
+            reader.onerror = function() {
+                echo(reader.error);
+            };
+        }
+    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+</body>
+</html>
